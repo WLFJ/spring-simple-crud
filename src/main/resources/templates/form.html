@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>企业信息管理</title>
+  </head>
+  <body
+	<main role="main">
+
+  <div class="container">
+  <div class="card mb-4">
+  <div class="card-header">
+  企业人力资源管理系统——招聘人员管理
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">请输入要添加的信息</h5>
+    <div class="card-text">
+<form th:action="${wyw_people} == null ? '/add' : '/update'" method="POST">
+<input type="hidden" name="wyw_id" th:value="${wyw_people} != null ? ${wyw_people.wyw_id}"/>
+  <div class="mb-3">
+    <label for="wyw_name" class="form-label">姓名</label>
+    <input type="text" class="form-control" th:value="${wyw_people} != null ? ${wyw_people.wyw_name}" name="wyw_name" id="wyw_name">
+  </div>
+  <div class="mb-3">
+    <label for="wyw_age" class="form-label">年龄</label>
+    <input type="text" class="form-control" name="wyw_age" th:value="${wyw_people} != null ? ${wyw_people.wyw_age}" id="wyw_age">
+  </div>
+  <div class="mb-3">
+    <label for="wyw_job" class="form-label">应聘职务</label>
+    <input type="text" class="form-control" name="wyw_job" th:value="${wyw_people} != null ? ${wyw_people.wyw_job}" id="wyw_job">
+  </div>
+  <button type="submit" class="btn btn-primary">提交</button>
+</form>
+    
+    </div>
+  </div>
+</div>
+
+
+</div>
+</main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  </body>
+</html>

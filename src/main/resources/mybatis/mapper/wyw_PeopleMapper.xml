@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="wyw1813004316qygl.dao.wyw_jobDao">
+	<resultMap id="peopleMap" type="wyw1813004316qygl.entity.wyw_People">
+		<id property="wyw_id" column="wywid"></id>
+		<result property="wyw_name" column="wywname"></result>
+		<result property="wyw_age" column="wywage"></result>
+		<result property="wyw_job" column="wywjob"></result>
+	</resultMap>
+	<insert id="addPeople" parameterType="wyw1813004316qygl.entity.wyw_People"
+	useGeneratedKeys="true" keyProperty="wyw_id">
+		insert into wywtb_inviteJob(wywname, wywage, wywjob) values(#{wyw_name}, #{wyw_age}, #{wyw_job});
+	</insert>
+	<delete id="deletePeople" parameterType="wyw1813004316qygl.entity.wyw_People">
+		delete from wywtb_inviteJob where wywid=#{wyw_id};	
+	</delete>
+	<update id="updatePeople" parameterType="wyw1813004316qygl.entity.wyw_People">
+		update wywtb_inviteJob set wywname=#{wyw_name}, wywage=#{wyw_age}, wywjob=#{wyw_job}
+		where wywid=#{wyw_id};	
+	</update>
+	<!--
+	
+	private Integer wyw_id;
+	private String wyw_name;
+	private Integer wyw_ageLower;
+	private Integer wyw_ageUpper;
+	private String wyw_job;
+	  -->
+	<select id="getPeople" resultMap="peopleMap" parameterType="wyw1813004316qygl.query.wyw_QueryPeople">
+	<!-- 这里我们使用查询对象就可以了 -->
+		select * from wywtb_inviteJob where 
+		1 = 1
+		<if test="wyw_id!=null">
+			and wywid=#{wyw_id}
+		</if>	
+		<if test="wyw_name!=null and wyw_name!=''">
+			and wywname like concat('%', #{wyw_name}, '%')
+		</if>	
+		<if test="wyw_ageLower!=null">
+			and wywage <![CDATA[ >= ]]> #{wyw_ageLower}
+		</if>	
+		<if test="wyw_ageUpper!=null">
+			and wywage <![CDATA[ <= ]]> #{wyw_ageUpper}
+		</if>	
+		<if test="wyw_job!=null and wyw_job!=''">
+			and wywjob like concat('%', #{wyw_job}, '%')
+		</if>	
+		;
+	</select>
+</mapper>
